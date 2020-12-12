@@ -10,32 +10,32 @@
         <section id="parasut" translate="label">
             <group id="mnm_parasut" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="80">
                 <label>Parasut</label>
-                <field id="is_enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                <field id="is_enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Parasut Integration</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="client_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="client_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Paraşüt Client Id</label>
                 </field>
-                <field id="username" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="username" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Paraşüt Username</label>
                 </field>
-                <field id="password" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="password" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Paraşüt Password</label>
             </field>
-                <field id="grant_type" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="grant_type" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Paraşüt Grand Type</label>
                     <comment><![CDATA[Default grant type is : password
                         ]]>
                     </comment>
             </field>
-                <field id="redirect_uri" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="redirect_uri" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Paraşüt Redirect Uri</label>
                     <comment><![CDATA[Default redirect uri is : urn:ietf:wg:oauth:2.0:oob
                         ]]>
                     </comment>
             </field>
-                <field id="company_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="company_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Paraşüt Company Id</label>
             </field>
             </group>

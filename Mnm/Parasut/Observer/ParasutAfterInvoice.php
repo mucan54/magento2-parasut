@@ -80,7 +80,9 @@ class ParasutAfterInvoice implements ObserverInterface
                 'data' => array (
                     'type' => 'products',
                     'attributes' => array (
-                        'name' => 'xxxx xx x x x x xx '
+                        'name' => $item->name,
+                        'id' => $item->sku,
+                        'price' => $item->price
                     )
                 )
             );
