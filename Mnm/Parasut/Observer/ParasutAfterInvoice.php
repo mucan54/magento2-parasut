@@ -63,12 +63,81 @@ class ParasutAfterInvoice implements ObserverInterface
 
             $this->createProducts($_invoice);
             $this->createCustomer($_invoice);
+            $this->createInvoice($_invoice);
 
         } else {
 
             // Logic for when invoice is updated
 
         }
+    }
+
+    public function createInvoice($invoice){
+
+        $invoice = array (
+            'data' => array (
+                'type' => 'sales_invoices', // Required
+                'attributes' => array (
+                    'item_type' => 'invoice', // Required
+                    'description' => 'Description',
+                    'issue_date' => '2018-03-19', // Required
+                    'due_date' => '2018-03-19',
+                    'invoice_series' => 'test',
+                    'invoice_id' => 1,
+                    'currency' => 'TRL'
+                ),
+                'relationships' => array (
+                    'details' => array (
+                        'data' =>array (
+                            0 => array (
+                                'type' => 'sales_invoice_details',
+                                'attributes' => array (
+                                    'quantity' => 1,
+                                    'unit_price' => 29.90,
+                                    'vat_rate' => 18,
+                                    'description' => 'Hosting'
+                                ),
+                                "relationships" => array (
+                                    "product" => array (
+                                        "data" => array (
+                                            "id" => "xxxxx",
+                                            "type" => "products"
+                                        )
+                                    )
+                                )
+                            ),
+                            1 => array (
+                                'type' => 'sales_invoice_details',
+                                'attributes' => array (
+                                    'quantity' => 1,
+                                    'unit_price' => 19.90,
+                                    'vat_rate' => 18,
+                                    'discount_type' => 'percentage',
+                                    'discount_value' => 10,
+                                    'description' => 'Domain'
+                                ),
+                                "relationships" => array (
+                                    "product" => array (
+                                        "data" => array (
+                                            "id" => "xxxxxx",
+                                            "type" => "products"
+                                        )
+                                    )
+                                )
+                            ),
+                        ),
+                    ),
+                    'contact' => array (
+                        'data' => array (
+                            'id' => 'xxxx',
+                            'type' => 'contacts'
+                        )
+                    )
+                ),
+            )
+        );
+        $this->client->call(Mnm\Model\Parasut\Invoice::class)->create($invoice);
+
     }
 
 
@@ -92,6 +161,43 @@ class ParasutAfterInvoice implements ObserverInterface
     }
 
     public function createCustomer($invoice){
+
+        $order=$invoice->getOrder();
+
+        $orderFromFront = $order->getRemoteIp();
+        $guestCustomer = $order->getCustomerIsGuest();
+        $groupId  = $order->getCustomerGroupId();
+        $firstname = $order->getCustomerFirstname();
+        $lastname = $order->getCustomerMiddlename();
+        $lastname = $order->getCustomerLastname();
+        $prefix = $order->getCustomerPrefix();
+        $suffix = $order->getCustomerSuffix();
+        $dob = $order->getCustomerDob();
+        $taxvat = $order->getCustomerTaxvat();
+        $gender = $order->getCustomerGender();
+        $email = $order->getCustomerId();
+        $address=$order->getBillingAddress();
+
+            $customer = array (
+                'data' =>
+                    array (
+                        'type' => 'contacts',
+                        'attributes' => array (
+                            'email' => $email,
+                            'name' => $firstname." ".$lastname, // REQUIRED
+                            'short_name' => $lastname,
+                            'contact_type' => 'person', // or company
+                            'district' => $address->getData("region"),
+                            'city' => $address->getData("region"),
+                            'address' => $address->getData("street"),
+                            'phone' => $address->getData("telephone"),
+                            'account_type' => 'customer', // REQUIRED
+                            'tax_number' => '11111111111 ', // TC no for person
+                            'tax_office' => $address->getData("region")
+                        )
+                    ),
+            );
+            $this->client->call(Parasut\Account::class)->create($customer);
 
     }
 
